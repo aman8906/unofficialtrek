@@ -1,0 +1,135 @@
+@import 'tailwindcss';
+
+/* ============================================================
+   DESIGN TOKENS (Tailwind v4: no tailwind.config.js needed)
+   Change colours / fonts / shadows ONLY here.
+   ============================================================ */
+@theme {
+  /* breakpoints */
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1400px;
+
+  /* colours */
+  --color-brand: #1f4d3a;
+  --color-brand-dark: #143327;
+  --color-brand-light: #e6f0ea;
+  --color-accent: #f26b21;
+  --color-accent-dark: #d9560f;
+  --color-ink: #17201b;
+  --color-body: #4b5651;
+  --color-section: #ffffff;
+  --color-section-alt: #f4f7f3;
+  --color-line: #e3e8e4;
+  /* header colours sampled from the reference screenshot */
+  --color-topbar: #1b457c;
+  --color-topbtn: #325889;
+  --color-navbar: #ffcc00;
+  --color-logoyellow: #efb71a;
+  --color-searchbtn: #e3ead0;
+    --color-authbanner: #294172;
+  --color-authgreen: #5ba352;
+  --color-authgreen-dark: #478a3f;
+  --color-authlink: #0066cc;
+  --color-authfocus: #e59700;
+  --color-authfield: #f6f6f6;
+  --color-authborder: #6b6b6b;
+    --color-dashbg: #f2f2f2;
+  --color-dashyellow: #ffc100;
+  --color-dashgreen: #397229;
+  --color-dashlink: #707070;
+  --color-dashfield: #f6f6f6;
+    /* home page (sampled from the reference screenshots) */
+  --color-ihyellow: #ffc100;
+  --color-ihcream: #fef7e3;
+  --color-ihbar: #fff5d2;
+  --color-ihpartner: #fff7d9;
+  --color-ihgreen: #3a652d;
+  --color-ihfaq: #f8f8f8;
+  --color-ihlink: #0d6efd;
+  --color-ihgold: #ffe8a4;
+  --color-ihlime: #dae4c1;
+  --color-ihfaintgreen: #f1f4e7;
+  --color-ihfaintyellow: #fff5cc;
+  --color-ihplay: #dc2913;
+
+  /* fonts */
+  --font-heading: 'Poppins', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+    --font-dash: 'Lora', Georgia, serif;
+      --font-serif: 'Lora', Georgia, serif;
+  --font-head: 'Libre Franklin', 'Franklin Gothic Medium', Arial, sans-serif;
+  --font-cond: 'Roboto Condensed', 'Arial Narrow', sans-serif;
+    --font-auth: 'Libre Franklin', 'Franklin Gothic Medium', Arial, sans-serif;
+
+  /* shadows and radius */
+  --shadow-card: 0 2px 10px rgba(16, 40, 28, 0.08);
+  --shadow-card-hover: 0 12px 30px rgba(16, 40, 28, 0.16);
+  --radius-card: 14px;
+
+  /* animations */
+  --animate-marquee: marquee 60s linear infinite;
+  --animate-fade-up: fade-up 0.6s ease both;
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  @keyframes fade-up {
+    0% { opacity: 0; transform: translateY(14px); }
+    100% { opacity: 1; transform: none; }
+  }
+}
+
+/* v4 container is not centred by default */
+@utility container {
+  margin-inline: auto;
+  padding-inline: 1rem;
+  @media (width >= 640px) { padding-inline: 1.5rem; }
+  @media (width >= 1024px) { padding-inline: 2rem; }
+}
+
+@layer base {
+  /* v4 default border colour is currentColor; keep the old soft line colour */
+  *, ::after, ::before, ::backdrop, ::file-selector-button { border-color: var(--color-line); }
+  button:not(:disabled), [role='button']:not(:disabled) { cursor: pointer; }
+  html { scroll-behavior: smooth; }
+  body { @apply font-body text-body bg-section antialiased; }
+  h1, h2, h3, h4 { @apply font-heading text-ink; }
+  h1 { @apply text-3xl font-bold leading-tight sm:text-4xl lg:text-5xl; }
+  h2 { @apply text-2xl font-semibold leading-snug sm:text-3xl lg:text-4xl; }
+  h3 { @apply text-lg font-semibold sm:text-xl; }
+  :focus-visible { @apply outline-2 outline-offset-2 outline-accent; }
+  img { @apply max-w-full; }
+}
+
+/* In v4 reusable classes are written with @utility (not @layer components) */
+@utility section { @apply py-12 sm:py-16 lg:py-20; }
+@utility section-alt { @apply bg-section-alt; }
+@utility card { @apply rounded-card bg-white shadow-card transition duration-300 hover:-translate-y-1 hover:shadow-card-hover; }
+@utility btn { @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition duration-200; }
+@utility btn-primary { @apply btn bg-accent text-white hover:bg-accent-dark; }
+@utility btn-brand { @apply btn bg-brand text-white hover:bg-brand-dark; }
+@utility btn-outline { @apply btn border border-brand text-brand hover:bg-brand hover:text-white; }
+@utility btn-white { @apply btn bg-white text-brand hover:bg-brand-light; }
+@utility input { @apply w-full rounded-lg border border-line bg-white px-4 py-2.5 text-sm text-ink placeholder:text-body/60 focus:border-brand focus:outline-hidden focus:ring-2 focus:ring-brand/20; }
+@utility label { @apply mb-1 block text-sm font-medium text-ink; }
+/* login / register form controls */
+@utility auth-label { @apply mb-1 block text-[13px] font-medium text-black; }
+@utility auth-input { @apply h-10 w-full rounded-[10px] border border-authborder bg-authfield px-3 text-sm text-black focus:border-authfocus focus:outline-hidden; }
+@utility auth-link { @apply text-authlink hover:underline; }
+@utility auth-btn { @apply flex h-10 w-full items-center justify-center rounded-[4px] bg-authgreen text-[15px] text-white transition hover:bg-authgreen-dark disabled:opacity-60; }
+@utility auth-btn-outline { @apply flex h-10 w-full items-center justify-center rounded-[4px] border border-authgreen bg-white text-[14px] text-authgreen transition hover:bg-authgreen hover:text-white; }
+@utility heading-underline {
+  position: relative;
+  padding-bottom: 1rem;
+  margin-bottom: 2rem;
+  &::after { content: ''; position: absolute; left: 0; bottom: 0; width: 64px; height: 4px; border-radius: 4px; background: var(--color-accent); }
+  &.center { text-align: center; }
+  &.center::after { left: 50%; transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}

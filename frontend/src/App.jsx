@@ -20,6 +20,7 @@ import TrekDetail from './pages/TrekDetail';
 import Policy from './pages/Policy';
 import { ActivityPage, VillagesPage } from './pages/Activity';
 import { WeatherPage, About, Contact, UpcomingPage } from './pages/Info';
+import UpcomingTreks from './pages/UpcomingTreks';
 import NotFound from './pages/NotFound';
 import { AuthProvider, RequireAuth } from './admin/auth';
 import AdminLogin from './admin/AdminLogin';
@@ -37,19 +38,18 @@ function PublicLayout() {
 
 export default function App() {
   // With the real backend, load site settings (logo text, banner, contact) once before the first paint.
-  const [ready, setReady] = useState(USE_MOCK);
   useEffect(() => {
-    if (USE_MOCK) return;
-    http.get('/settings').then((r) => writeStore('admin:settings', r.data.data)).catch(() => {}).finally(() => setReady(true));
-  }, []);
-  if (!ready) return <div className="grid min-h-screen place-items-center text-sm">Loading...</div>;
+  if (USE_MOCK) return;
+  http.get('/settings').then((r) => writeStore('admin:settings', r.data.data)).catch(() => {});
+}, []);
   return (
     <UserAuthProvider>
       <AuthProvider>
         <Routes>
           <Route element={<PublicLayout />}>
             <Route index element={<Home />} />
-            <Route path="upcoming" element={<UpcomingPage />} />
+           
+            <Route path="upcoming" element={<UpcomingTreks />} />
             <Route path="treks" element={<AllTreks />} />
             <Route path="treks/season/:season" element={<SeasonPage />} />
             <Route path="treks/:slug" element={<TrekDetail />} />

@@ -4,11 +4,11 @@ import { HomeHeading } from './primitives';
 
 const ICONS = { ShieldCheck, ClipboardList, Users, Handshake, Leaf, Backpack };
 
-export default function AdvantageCards() {
+export default function AdvantageCards({ title = 'The Unofficial Trek Advantage.' }) {
   return (
     <section className="py-10 sm:py-14">
       <div className="container">
-        <HomeHeading title="The Unofficial Trek Advantage." />
+        <HomeHeading title={title} />
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:px-4">
           {advantages.map((a) => {
             const Icon = ICONS[a.icon] || ShieldCheck;

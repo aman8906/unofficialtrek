@@ -41,7 +41,9 @@ export const getSeasons = () => get('/seasons', {}, () => readStore('admin:seaso
 export const getActivities = (type) => get('/activities', { type }, () => liveActivities().filter((a) => !type || a.type === type));
 export const getVillages = () => get('/villages', {}, () => liveVillages());
 export const getTestimonials = () => get('/testimonials', {}, () => readStore('admin:testimonials', M.testimonials).filter((t) => t.approved !== false));
-export const getWeather = () => get('/weather', {}, () => readStore('admin:weather', M.weather));
+export const wRows = () => readStore('admin:weather', M.weather).map((w) => ({ ...w, date: w.date || new Date().toISOString().slice(0, 10) }));
+export const getWeather = (month) => get('/weather', { month }, () => wRows().filter((w) => !month || w.date.startsWith(month)).sort((a, b) => b.date.localeCompare(a.date)));
+export const getWeatherMonths = () => get('/weather/months', {}, () => [...new Set(wRows().map((w) => w.date.slice(0, 7)))].sort().reverse());
 export const getFaqs = () => get('/faqs', {}, () => readStore('admin:faqs', M.faqs));
 export const getBatches = (trekTitle) => get('/batches', { trek: trekTitle }, () => readStore('admin:batches', M.sampleBatches).filter((b) => b.trek === trekTitle && b.status === 'open'));
 export const getAllBatches = () => get('/batches', {}, () => readStore('admin:batches', M.sampleBatches).filter((b) => b.status === 'open'));

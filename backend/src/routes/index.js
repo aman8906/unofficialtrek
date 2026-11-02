@@ -21,6 +21,7 @@ router.get('/seasons', pub.listSeasons);
 router.get('/activities', pub.listActivities);
 router.get('/villages', pub.listVillages);
 router.get('/testimonials', pub.listTestimonials);
+router.get('/weather/months', pub.weatherMonths);
 router.get('/weather', pub.listWeather);
 router.get('/faqs', pub.listFaqs);
 router.get('/batches', pub.listBatches);

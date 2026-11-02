@@ -11,6 +11,7 @@ import { useUserAuth } from '../user/UserAuth';
 // ---- Edit menu content here (labels and links) ----------------------------
 const UTILITY = [['Contact us', '/contact'], ['Book now', '/treks']];
 const DIFFICULTY = ['Easy-Moderate', 'Moderate', 'Difficult'];
+const STORY_MENU = [['About Us', '/about'], ['Our Explorations', '/explorations'], ['Trending Treks', '/trending']]; // "Our story" dropdown
 const YELLOW_NAV = [
   { label: 'Upcoming treks', to: '/upcoming' },
   { label: 'Treks by season', to: '/treks', menu: 'seasons' },
@@ -18,7 +19,7 @@ const YELLOW_NAV = [
   { label: 'Rafting', to: '/rafting' },
   { label: 'Bungee jumping', to: '/bungee-jumping' },
   { label: 'Weather updates', to: '/weather' },
-  { label: 'Our story', to: '/about' },
+  { label: 'Our story', to: '/about', menu: 'story' },
 ];
 // ---------------------------------------------------------------------------
 
@@ -169,7 +170,11 @@ export default function Header() {
         {/* yellow menu bar (desktop) */}
         <nav aria-label="Main" className="hidden bg-navbar xl:block">
           <div className="mx-auto flex max-w-[1400px] items-stretch justify-between px-2 sm:px-6">
-            {YELLOW_NAV.map((it) => it.menu ? (
+            {YELLOW_NAV.map((it) => it.menu === 'story' ? (
+              <Dropdown key={it.label} panelClass="w-56" trigger={<NavLink to={it.to} className={(a) => `${yellowItem(a)} h-full`}>{it.label} <ChevronDown className="h-4 w-4 transition group-hover:rotate-180" /></NavLink>}>
+                {STORY_MENU.map(([label, to]) => <Link key={to} to={to} className="block px-3 py-2 font-head text-[13px] text-black hover:bg-ihfaq">{label}</Link>)}
+              </Dropdown>
+            ) : it.menu ? (
               <Dropdown key={it.label} trigger={<NavLink to={it.to} className={(a) => `${yellowItem(a)} h-full`}>{it.label} <ChevronDown className="h-4 w-4 transition group-hover:rotate-180" /></NavLink>}>
                 {seasons.map((x) => <Link key={x.id} to={`/treks/season/${x.id}`} className="block rounded-lg px-3 py-2.5 hover:bg-brand-light"><span className="block font-medium text-ink">{x.label}</span><span className="text-xs">{x.months}</span></Link>)}
                 <Link to="/treks" className="mt-1 block rounded-lg bg-brand-light px-3 py-2.5 text-sm font-semibold text-brand">All treks</Link>
@@ -194,7 +199,7 @@ export default function Header() {
                 <Link to="/treks" className="block py-2.5 font-semibold text-brand">All treks</Link>
               </div>
             )}
-            {[['/villages', 'Village Culture Treks & Experience'], ['/rafting', 'Rafting'], ['/bungee-jumping', 'Bungee jumping'], ['/weather', 'Weather updates'], ['/about', 'Our story'], ...quick.map(([l, t]) => [t, l])].map(([to, label]) => (
+            {[['/villages', 'Village Culture Treks & Experience'], ['/rafting', 'Rafting'], ['/bungee-jumping', 'Bungee jumping'], ['/weather', 'Weather updates'], ...STORY_MENU.map(([l, t]) => [t, l]), ...quick.map(([l, t]) => [t, l])].map(([to, label]) => (
               <Link key={label} to={to} className="border-b border-line py-4 font-heading text-base font-semibold uppercase text-ink">{label}</Link>
             ))}
             <Link to="/contact" className="btn-primary mt-6">Enquire now</Link>

@@ -19,7 +19,13 @@ import { AllTreks, SeasonPage } from './pages/Treks';
 import TrekDetail from './pages/TrekDetail';
 import Policy from './pages/Policy';
 import { ActivityPage, VillagesPage } from './pages/Activity';
-import { WeatherPage, About, Contact, UpcomingPage } from './pages/Info';
+//import { WeatherPage, About, Contact, UpcomingPage } from './pages/Info';
+import About from './pages/About';
+import Explorations from './pages/Explorations';
+import StoryDetail from './pages/StoryDetail';
+import Trending from './pages/Trending';
+import NewsPage from './pages/NewsPage';
+import ContactPage from './pages/ContactPage';
 import UpcomingTreks from './pages/UpcomingTreks';
 import NotFound from './pages/NotFound';
 import { AuthProvider, RequireAuth } from './admin/auth';
@@ -56,9 +62,14 @@ export default function App() {
             <Route path="rafting" element={<ActivityPage type="rafting" />} />
             <Route path="bungee-jumping" element={<ActivityPage type="bungee" />} />
             <Route path="villages" element={<VillagesPage />} />
-            <Route path="weather" element={<WeatherPage />} />
+            
+<Route path="weather" element={<NewsPage />} />
+<Route path="trending" element={<Trending />} />
+<Route path="explorations" element={<Explorations />} />
+<Route path="explorations/:slug" element={<StoryDetail />} />
+
             <Route path="about" element={<About />} />
-            <Route path="contact" element={<Contact />} />
+            <Route path="contact" element={<ContactPage />} />
             <Route path="privacy-policy" element={<Policy />} />
             <Route path="*" element={<NotFound />} />
           </Route>

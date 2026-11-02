@@ -43,7 +43,22 @@ export const listActivities = asyncHandler(async (req, res) => {
 });
 export const listVillages = asyncHandler(async (_req, res) => ok(res, await Village.find(LIVE).sort({ createdAt: 1 })));
 export const listTestimonials = asyncHandler(async (_req, res) => ok(res, await Testimonial.find({ approved: { $ne: false } }).sort({ createdAt: -1 })));
-export const listWeather = asyncHandler(async (_req, res) => ok(res, await Weather.find().sort({ createdAt: -1 }).limit(30)));
+export // Weather / trek news. Old rows without a `date` fall back to the day they were created.
+const wdate = (r) => r.date || r.createdAt.toISOString().slice(0, 10);
+const weatherRows = async () => (await Weather.find().sort({ createdAt: -1 }).limit(500)).map((r) => ({ ...r.toJSON(), date: wdate(r) }));
+export const listWeather = asyncHandler(async (req, res) => {
+  const { month } = req.query;
+  if (month && !/^\d{4}-\d{2}$/.test(String(month))) throw new ApiError(400, 'month must look like 2026-11');
+  let rows = await weatherRows();
+  if (month) rows = rows.filter((r) => r.date.startsWith(String(month)));
+  rows.sort((a, b) => b.date.localeCompare(a.date));
+  ok(res, rows.slice(0, 60));
+});
+// ["2026-11", "2026-10", ...] newest first, for the Next / Prev month buttons
+export const weatherMonths = asyncHandler(async (_req, res) => {
+  const rows = await weatherRows();
+  ok(res, [...new Set(rows.map((r) => r.date.slice(0, 7)))].sort().reverse());
+});
 export const listFaqs = asyncHandler(async (_req, res) => ok(res, await Faq.find().sort({ order: 1, createdAt: 1 })));
 
 export const listBatches = asyncHandler(async (req, res) => {

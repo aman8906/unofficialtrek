@@ -4,7 +4,7 @@ import { settings as defaults } from '../data/mock';
 import { USE_MOCK } from '../services/api';
 import { adminApi, errMsg } from '../services/adminApi';
 
-const fields = [['siteName', 'Site name'], ['tagline', 'Tagline'], ['phone', 'Phone'], ['email', 'Email'], ['address', 'Address'], ['hours', 'Working hours'], ['heroTitle', 'Home hero heading'], ['heroSub', 'Home hero sub text'], ['banner', 'Announcement strip text'], ['bannerLink', 'Strip link (path)'], ['bannerLinkText', 'Strip link text']];
+const fields = [['siteName', 'Site name'], ['tagline', 'Tagline'], ['phone', 'Phone'],['emergencyPhone', 'Emergency contact number'], ['email', 'Email'], ['address', 'Address'], ['hours', 'Working hours'], ['heroTitle', 'Home hero heading'], ['heroSub', 'Home hero sub text'], ['banner', 'Announcement strip text'], ['bannerLink', 'Strip link (path)'], ['bannerLinkText', 'Strip link text']];
 
 export default function SettingsPage() {
   const [f, setF] = useState({ ...defaults, ...readStore('admin:settings', {}) });

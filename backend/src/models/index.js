@@ -122,6 +122,10 @@ const weatherSchema = new Schema({
   trek: String, condition: String,
   min: Number, max: Number,
   bullets: [String],
+    date: { type: String, match: /^\d{4}-\d{2}-\d{2}$/, default: () => new Date().toISOString().slice(0, 10) },
+  headline: { type: String, default: '' },
+  author: { type: String, default: 'Trek Team' },
+  image: { type: String, default: '' },
   updatedAt: { type: String, default: () => new Date().toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' }) },
 }, { ...opts, timestamps: { createdAt: true, updatedAt: false } });
 

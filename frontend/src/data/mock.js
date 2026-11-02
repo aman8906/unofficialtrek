@@ -13,8 +13,17 @@ export const settings = {
   bannerLinkText: 'View Winter Treks',
   heroTitle: 'Uttarakhand’s mountains are calling. Walk into them.',
   heroSub: 'Winter snow, summer meadows, monsoon flowers and golden autumn trails, with local guides who know every turn.',
-  social: { instagram: '#', facebook: '#', youtube: '#' },
+  social: { instagram: '#', facebook: '#', youtube: '#'},
 };
+export const weather = [
+  { id: 'w1', date: '2026-11-01', author: 'Trek Team', basecamp: 'Kotgaon', trek: 'Kedarkantha', condition: 'Clear skies', min: -2, max: 9, bullets: ['Group 1 reached the summit this morning', 'Group 2 is travelling from Dehradun', 'Trail is open and snow is hard in the early morning'], updatedAt: '01 Nov 2026, 8:00 AM' },
+  { id: 'w2', date: '2026-11-01', author: 'Trek Team', basecamp: 'Lohajung', trek: 'Brahmatal', condition: 'Light snowfall', min: -4, max: 5, bullets: ['Group 1 is at Bekaltal camp', 'Microspikes in use above the treeline'], updatedAt: '01 Nov 2026, 8:30 AM' },
+  { id: 'w3', date: '2026-11-01', author: 'Trek Team', basecamp: 'Sari', trek: 'Deoriatal Chandrashila', condition: 'Partly cloudy', min: 3, max: 13, bullets: ['Group 1 finished the trek', 'Next group arrives tomorrow'], updatedAt: '01 Nov 2026, 11:45 AM' },
+  { id: 'w4', date: '2026-10-28', author: 'Trek Team', basecamp: 'Kotgaon', trek: 'Kedarkantha', condition: 'Sunny morning', min: 0, max: 11, bullets: ['First winter batch reached Juda ka Talab', 'Clear views of Swargarohini'], updatedAt: '28 Oct 2026, 8:00 AM' },
+  { id: 'w5', date: '2026-10-20', author: 'Trek Team', basecamp: 'Dhaula', trek: 'Har Ki Dun', condition: 'Cloudy with sunshine', min: 4, max: 15, bullets: ['Group 2 crossed the Supin river', 'Trail dry and easy'], updatedAt: '20 Oct 2026, 9:15 AM' },
+  { id: 'w6', date: '2026-10-08', author: 'Trek Team', basecamp: 'Sari', trek: 'Deoriatal Chandrashila', condition: 'Clear skies', min: 6, max: 17, bullets: ['Golden autumn light on the ridge', 'All batches running on time'], updatedAt: '08 Oct 2026, 7:50 AM' },
+  { id: 'w7', date: '2026-09-22', author: 'Trek Team', basecamp: 'Govindghat', trek: 'Valley of Flowers', condition: 'Light rain', min: 9, max: 18, bullets: ['Last flower batch of the season finished', 'Trail slippery, trekking poles advised'], updatedAt: '22 Sep 2026, 10:00 AM' },
+];
 
 export const seasons = [
   { id: 'winter', label: 'Winter', months: 'Dec, Jan, Feb', blurb: 'Snow-draped forests and frozen lakes. Summit climbs while most peaks are shut.', hue: 205 },
@@ -84,11 +93,7 @@ export const testimonials = [
   { id: 'r5', name: 'Karan Singh', designation: 'Doctor, Chandigarh', headline: 'Professional and safety first.', excerpt: 'Oxygen levels were checked each evening and the medical kit was complete. Rare to see in group treks.', rating: 5, approved: true },
 ];
 
-export const weather = [
-  { id: 'w1', basecamp: 'Kotgaon', trek: 'Kedarkantha', condition: 'Clear skies', min: -2, max: 9, bullets: ['Group 1 reached the summit this morning', 'Group 2 is travelling from Dehradun', 'Trail is open and snow is hard in the early morning'], updatedAt: '28 Oct 2026, 8:00 AM' },
-  { id: 'w2', basecamp: 'Lohajung', trek: 'Brahmatal', condition: 'Light snowfall', min: -4, max: 5, bullets: ['Group 1 is at Bekaltal camp', 'Microspikes in use above the treeline'], updatedAt: '28 Oct 2026, 8:00 AM' },
-  { id: 'w3', basecamp: 'Sari', trek: 'Deoriatal Chandrashila', condition: 'Partly cloudy', min: 3, max: 13, bullets: ['Group 1 finished the trek', 'Next group arrives tomorrow'], updatedAt: '28 Oct 2026, 8:00 AM' },
-];
+
 
 export const faqs = [
   { id: 'f1', question: 'Which trek is best for a first-timer?', answer: 'Kedarkantha, Dayara Bugyal and Deoriatal Chandrashila are easy-moderate and have gentle daily gains. Pick by season using the tabs on the home page.' },
